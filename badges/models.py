@@ -55,8 +55,11 @@ class Badge(models.Model):
                 
         badge_awarded.send(sender=self.meta_badge, user=user, badge=self)
         
-        message_template = "You just got the %s Badge!"
-        user.message_set.create(message = message_template % self.title)
+        try:
+            message_template = "You just got the %s Badge!"
+            user.message_set.create(message = message_template % self.title)
+        except:
+            pass
         
         return BadgeToUser.objects.filter(badge=self, user=user).count()
 
