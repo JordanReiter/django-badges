@@ -19,6 +19,10 @@ else:
     )
 
 class Badge(models.Model):
+
+    class Meta:
+        app_label = 'badges'
+
     id = models.CharField(max_length=255, primary_key=True)
     user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="badges", through='BadgeToUser')
     level = models.CharField(max_length=1, choices=LEVEL_CHOICES)
